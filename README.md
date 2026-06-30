@@ -20,4 +20,16 @@ We first select the city we are exploring. Now we are presented with a curated l
 
 Since the application depends heavily on user-generated data, we used Generative AI to curate a list of tourist attractions in various cities including features such as rating, cost, address, suitability, and estimated time. Once of our team members, acted as a user of our app, deciding whether or not they would visit these stops. Based off of this, we were able to train multiple machine learning models (Logistic Regression, Decision Trees, Random Forest, Neural Networks, and CNN) and found that CNN resulted in 82 percent. However, we had trouble integrating CNN with our prediction dataset and used our Logistic Regression Model which had a high accuracy as well. We then used this to predict tourist attractions in Charlottesville the user would find interesting with our model and displayed in our Anvil App which integrated Google Collab where we wrote the Machine Learning code with scikit-learn and TensorFlow.
 
-Link to application: 
+## Testing Models:
+
+Possible Model Names:
+
+* cnn
+* neural_network_tensorflow
+* neural_network_scikit_learn
+* naive_bayes
+* logistic_regression
+* svm
+* decision_tree
+
+'python main.py [replace with model_name as above]' 
