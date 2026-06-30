@@ -4,7 +4,7 @@
 
 Link to Devpost: https://devpost.com/software/wander-vjhdyn
 
-NOTE: This project was developed and evaluated inside Google Colab to utilize cloud GPU resources. The final production-ready scripts and notebooks have been consolidated here for version control and portfolio presentation.
+NOTE: This project was developed and evaluated inside Google Colab to utilize cloud GPU resources. The final production-ready scripts and notebooks have been consolidated here for version control and portfolio presentation. Thus, everything was committed to the main branch directly.
 
 This application, Wander, is designed to revolutionize the way travelers explore new cities by leveraging machine learning. We have developed a machine learning model that curates a list of activities recommended to you to do in a new city based on past tourist attractions you have liked or disliked in other cities. By collecting data on tourist attractions across various cities and integrating user preferences, we provide a tailored experience that evolves with every trip.
 
@@ -32,4 +32,4 @@ Possible Model Names:
 * svm
 * decision_tree
 
-'python main.py [replace with model_name as above]' 
+`python main.py [replace with model_name as above]`
