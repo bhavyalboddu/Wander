@@ -1,11 +1,11 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 
 def train_model(train_prepared, train_labels):
-    model = LogisticRegression(max_iter=10000, random_state=0)
+    model = DecisionTreeClassifier(random_state=41)
     model.fit(train_prepared, train_labels)
     return model
 
@@ -18,15 +18,14 @@ def generate_classification_report(classifier_predictions, test_labels):
     return classification_report(test_labels, classifier_predictions)
 
 def tune_model(train_prepared, train_labels, test_prepared, test_labels, cv=5):
-    pipe = make_pipeline(
-        StandardScaler(),
-        LogisticRegression(max_iter=100000, solver='saga', tol=1e-4)
-    )
     param_grid = {
-        'logisticregression__C': [0.1, 1, 10, 100],
-        'logisticregression__penalty': ['l1', 'l2']
+        'max_depth': range(1, 10, 1),
+        'min_samples_leaf': range(1, 20, 2),
+        'min_samples_split': range(2, 20, 2),
+        'criterion': ["entropy", "gini"]
     }
-    grid_search = GridSearchCV(pipe, param_grid=param_grid, cv=cv)
+    tree = DecisionTreeClassifier(random_state=41)
+    grid_search = GridSearchCV(estimator=tree, param_grid=param_grid, cv=cv, verbose=True)
     grid_search.fit(train_prepared, train_labels)
  
     print("Best Parameters:", grid_search.best_params_)
@@ -37,3 +36,9 @@ def tune_model(train_prepared, train_labels, test_prepared, test_labels, cv=5):
     test_acc = accuracy_score(test_labels, test_predictions) * 100
  
     return grid_search, best_model, test_acc
+
+def full_pipeline(train_prepared, train_labels, test_prepared, test_labels):
+    model = train_model(train_prepared, train_labels)
+    accuracy, classifier_predictions = evaluate_model(model, test_prepared, test_labels)
+    report = generate_classification_report(classifier_predictions, test_labels)
+    return model, accuracy, report

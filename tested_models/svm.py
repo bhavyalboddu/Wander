@@ -13,3 +13,9 @@ def evaluate_model(model, test_prepared, test_labels):
 
 def generate_classification_report(classifier_predictions, test_labels):
     return classification_report(test_labels, classifier_predictions)
+
+def full_pipeline(train_prepared, train_labels, test_prepared, test_labels):
+    model = train_model(train_prepared, train_labels)
+    accuracy, classifier_predictions = evaluate_model(model, test_prepared, test_labels)
+    report = generate_classification_report(classifier_predictions, test_labels)
+    return model, accuracy, report

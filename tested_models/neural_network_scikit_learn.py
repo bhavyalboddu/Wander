@@ -64,3 +64,9 @@ def tune_model_randomized(train_prepared, train_labels, test_prepared, test_labe
     test_acc = accuracy_score(test_labels, test_predictions) * 100
 
     return random_search, best_model, test_acc
+
+def full_pipeline(train_prepared, train_labels, test_prepared, test_labels):
+    model = train_model(train_prepared, train_labels)
+    accuracy, classifier_predictions = evaluate_model(model, test_prepared, test_labels)
+    report = generate_classification_report(classifier_predictions, test_labels)
+    return model, accuracy, report
